@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'io.quarkus' version '2.7.1.Final'
+    id 'io.freefair.lombok' version "5.3.3.3"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    quarkusversion = '2.7.1.Final'
+}
+
+dependencies {
+
+    // Quarkus Universe
+    implementation enforcedPlatform("io.quarkus:quarkus-universe-bom:${project.quarkusversion}")
+    implementation group: 'io.quarkus', name: 'quarkus-resteasy'
+    implementation group: 'io.quarkus', name: 'quarkus-smallrye-health'
+
+    // Soporte json
+    implementation group: 'io.quarkus', name: 'quarkus-resteasy-jackson'
+
+    // Driver de postgresql
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.1'
+
+    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.0.1'
+
+    // https://mvnrepository.com/artifact/io.quarkus/quarkus-consul-config
+    implementation group: 'io.quarkus', name: 'quarkus-consul-config'
+
+    // Registro
+    implementation("com.orbitz.consul:consul-client:1.5.3")
+
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+}
+
+sourceSets {
+    main {
+        output.resourcesDir = file("${buildDir}/classes/java/main")
+    }
+}
